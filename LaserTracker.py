@@ -10,24 +10,9 @@ class LaserTracker(object):
 
     def __init__(self, cam_width=640, cam_height=480, hue_min=51, hue_max=73,
                  sat_min=28, sat_max=110, val_min=172, val_max=256,
-                 display_thresholds=False):
+                 display_thresholds=True):
         """
-        * ``cam_width`` x ``cam_height`` -- This should be the size of the
-        image coming from the camera. Default is 640x480.
-
-        HSV color space Threshold values for a RED laser pointer are determined
-        by:
-
-        * ``hue_min``, ``hue_max`` -- Min/Max allowed Hue values
-        * ``sat_min``, ``sat_max`` -- Min/Max allowed Saturation values
-        * ``val_min``, ``val_max`` -- Min/Max allowed pixel values
-
-        If the dot from the laser pointer doesn't fall within these values, it
-        will be ignored.
-
-        * ``display_thresholds`` -- if True, additional windows will display
-          values for threshold image channels.
-
+        Doc for LaserTracker
         """
 
         self.cam_width = cam_width
@@ -224,62 +209,5 @@ class LaserTracker(object):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Run the Laser Tracker')
-    parser.add_argument('-W', '--width',
-                        default=640,
-                        type=int,
-                        help='Camera Width'
-                        )
-    parser.add_argument('-H', '--height',
-                        default=480,
-                        type=int,
-                        help='Camera Height'
-                        )
-    parser.add_argument('-u', '--huemin',
-                        default=20,
-                        type=int,
-                        help='Hue Minimum Threshold'
-                        )
-    parser.add_argument('-U', '--huemax',
-                        default=160,
-                        type=int,
-                        help='Hue Maximum Threshold'
-                        )
-    parser.add_argument('-s', '--satmin',
-                        default=100,
-                        type=int,
-                        help='Saturation Minimum Threshold'
-                        )
-    parser.add_argument('-S', '--satmax',
-                        default=255,
-                        type=int,
-                        help='Saturation Maximum Threshold'
-                        )
-    parser.add_argument('-v', '--valmin',
-                        default=200,
-                        type=int,
-                        help='Value Minimum Threshold'
-                        )
-    parser.add_argument('-V', '--valmax',
-                        default=255,
-                        type=int,
-                        help='Value Maximum Threshold'
-                        )
-    parser.add_argument('-d', '--display',
-                        action='store_true',
-                        help='Display Threshold Windows'
-                        )
-    params = parser.parse_args()
-
-    tracker = LaserTracker(
-        cam_width=params.width,
-        cam_height=params.height,
-        hue_min=params.huemin,
-        hue_max=params.huemax,
-        sat_min=params.satmin,
-        sat_max=params.satmax,
-        val_min=params.valmin,
-        val_max=params.valmax,
-        display_thresholds=params.display
-    )
+    tracker = LaserTracker()
     tracker.run()
